@@ -1,0 +1,37 @@
+package org.example;
+
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        int price;
+
+
+       ArrayList<Double> examScores = new ArrayList<>();
+       examScores.add(100.00);
+
+
+        Student student1 = new Student(
+                "Julio",
+                "Rodriguez",
+                examScores
+        );
+
+        System.out.println(student1.getFirstName());
+        System.out.println(student1.getLastName());
+        student1.getScores();
+        student1.setExamScore(0, 150);
+
+//        System.out.println(student1.getScores());
+//
+//        System.out.println(student1.getAverageExamScore());
+
+        student1.addExamScore(78.5);
+
+//        System.out.println(student1.getAverageExamScore());
+
+        System.out.println(student1.toString());
+
+//        System.out.println(student1.getScores());
+    }
+}
