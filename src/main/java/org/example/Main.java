@@ -52,6 +52,19 @@ public class Main {
         System.out.println(firstClass.getHeadCount());
 
         System.out.println(firstClass.getStudents());
+
+        System.out.println(firstClass.getAverageScore());
+
+        firstClass.removeStudent(student2);
+
+        System.out.println(firstClass.getHeadCount());
+
+        System.out.println(firstClass.getStudents());
+
+        System.out.println(firstClass.getAverageScore());
+
+
+
     }
 
 

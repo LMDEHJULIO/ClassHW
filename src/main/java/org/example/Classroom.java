@@ -31,14 +31,32 @@ public class Classroom {
         double classAvg = 0.0;
 
         for(Student student : this.students){
-            classAvg += student.getAverageExamScore();
+            if(!isNull(student)){
+                classAvg += student.getAverageExamScore();
+            }
         }
 
         return classAvg / this.getHeadCount();
     }
 
+    // Figure out good comparison option within sorted
+
+//    public getStudentsByScore(){
+//        return Arrays.stream(this.students).sorted((s1, s2) -> );
+//    }
+
+    public void removeStudent(Student expelledStudent){
+        int expelledStudentIndex = Arrays.asList(this.students).indexOf(expelledStudent);
+
+        this.students[expelledStudentIndex] = null;
+    }
+
     public int getHeadCount(){
-        return (int) Arrays.stream(this.students).filter(student -> student != null).count();
+        return (int) Arrays.stream(this.students).filter(student -> !isNull(student)).count();
+    }
+
+    public boolean isNull(Student student){
+        return student == null;
     }
 
     public Classroom(int maxStudents) {
