@@ -14,7 +14,7 @@ public class Main {
         Student student1 = new Student(
                 "Julio",
                 "Rodriguez",
-                examScores
+
         );
 
         System.out.println(student1.getFirstName());
@@ -34,4 +34,7 @@ public class Main {
 
 //        System.out.println(student1.getScores());
     }
+
+    Classroom firstClass = new Classroom();
+    firstClass.addStudent()
 }

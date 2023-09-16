@@ -58,10 +58,11 @@ public class Student {
         return scoreSum / examScores.size();
     }
 
-    public Student(String firstName, String lastName, ArrayList<Double> examScores){
+    public Student(String firstName, String lastName, Double[] testScores){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.examScores = examScores;
+//        this.examScores = examScores;
+        this.testScores = testScores;
     }
 
 

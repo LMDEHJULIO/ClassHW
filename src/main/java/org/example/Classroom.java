@@ -1,11 +1,11 @@
 package org.example;
 
-import javax.management.loading.ClassLoaderRepository;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class Classroom {
     private Student[] students;
+
+    public void addStudent(){
+        this.students[students.length - 1];
+    }
 
     public Classroom(int maxStudents) {
         this.students = new Student[maxStudents];
@@ -18,4 +18,6 @@ public class Classroom {
     public Classroom(){
         this(30);
     }
+
+
 }
