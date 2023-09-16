@@ -38,7 +38,7 @@ public class Classroom {
     }
 
     public int getHeadCount(){
-        return Arrays.stream(this.students).filter(student -> student != null );
+        return (int) Arrays.stream(this.students).filter(student -> student != null);
     }
 
     public Classroom(int maxStudents) {
