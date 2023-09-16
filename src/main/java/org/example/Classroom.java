@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class Classroom {
     private Student[] students;
 
@@ -26,14 +28,17 @@ public class Classroom {
     }
 
     public Double getAverageScore(){
-        double clasAvg
-        for(Student student : this.students){
+        double classAvg = 0.0;
 
+        for(Student student : this.students){
+            classAvg += student.getAverageExamScore();
         }
+
+        return classAvg / this.getHeadCount();
     }
 
     public int getHeadCount(){
-        return this.students.length;
+        return Arrays.stream(this.students).filter(student -> student != null );
     }
 
     public Classroom(int maxStudents) {
