@@ -25,6 +25,13 @@ public class Classroom {
         return studentString;
     }
 
+    public Double getAverageScore(){
+        double clasAvg
+        for(Student student : this.students){
+
+        }
+    }
+
     public int getHeadCount(){
         return this.students.length;
     }
