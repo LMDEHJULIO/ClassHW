@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Classroom {
@@ -44,6 +45,27 @@ public class Classroom {
 //    public getStudentsByScore(){
 //        return Arrays.stream(this.students).sorted((s1, s2) -> );
 //    }
+
+    public ArrayList<Character> getGradeBook(){
+        char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
+        char letterGrade;
+        ArrayList<Character> gradebook = null;
+
+
+        for(Student student : this.students){
+            Double averageScore = student.getAverageExamScore();
+
+            letterGrade = (averageScore > 93) ? letterGrades[0] :
+                            (averageScore > 85) ? letterGrades[1] :
+                            (averageScore > 80) ? letterGrades[2] :
+                            (averageScore > 70) ? letterGrades[3] :
+                            letterGrades[4];
+
+            gradebook.add(letterGrade);
+        }
+
+        return gradebook;
+    }
 
     public void removeStudent(Student expelledStudent){
         int expelledStudentIndex = Arrays.asList(this.students).indexOf(expelledStudent);

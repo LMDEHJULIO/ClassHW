@@ -77,4 +77,6 @@ public class Student {
         return firstLine + secondLine + ">" + getScores();
     }
 
+
+
 }

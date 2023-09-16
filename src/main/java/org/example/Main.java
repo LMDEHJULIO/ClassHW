@@ -63,6 +63,7 @@ public class Main {
 
         System.out.println(firstClass.getAverageScore());
 
+        firstClass.getGradeBook();
 
 
     }
