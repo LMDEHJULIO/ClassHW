@@ -2,6 +2,7 @@ package org.example;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Student {
 
@@ -27,6 +28,7 @@ public class Student {
 
         return scoreString.indent(this.examScores.size());
     }
+
 
     public void setFirstName(String firstName){
         this.firstName = firstName;
@@ -62,7 +64,7 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
 //        this.examScores = examScores;
-        this.testScores = testScores;
+        this.examScores = new ArrayList<>(Arrays.asList(testScores));
     }
 
 
@@ -72,7 +74,7 @@ public class Student {
                 firstLine = "> Student Name: " + this.getFirstName() + " " + this.getLastName() + " \n";
                 secondLine = "> Average Score: " + this.getAverageExamScore() + " \n";
 
-        return firstLine + secondLine + getScores();
+        return firstLine + secondLine + ">" + getScores();
     }
 
 }

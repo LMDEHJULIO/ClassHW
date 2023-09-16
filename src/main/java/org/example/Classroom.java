@@ -3,8 +3,30 @@ package org.example;
 public class Classroom {
     private Student[] students;
 
-    public void addStudent(){
-        this.students[students.length - 1];
+    public boolean addStudent(Student newStudent){
+        for(int i = 0; i < students.length; i++) {
+            if (students[i] == null) {
+                students[i] = newStudent;
+                return true;
+            }
+        }
+        System.out.println("Enrollment full.");
+        return false;
+    }
+
+    public String getStudents(){
+        String studentString = "";
+        for(Student student : this.students){
+            if(student != null) {
+                studentString += student.toString();
+            }
+
+        }
+        return studentString;
+    }
+
+    public int getHeadCount(){
+        return this.students.length;
     }
 
     public Classroom(int maxStudents) {
