@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -55,7 +56,7 @@ public class Main {
 
         System.out.println(firstClass.getAverageScore());
 
-        firstClass.removeStudent(student2);
+//        firstClass.removeStudent(student2);
 
         System.out.println(firstClass.getHeadCount());
 
@@ -63,7 +64,9 @@ public class Main {
 
         System.out.println(firstClass.getAverageScore());
 
-        firstClass.getGradeBook();
+        System.out.println(firstClass.getGradeBook());
+
+        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
 
 
     }

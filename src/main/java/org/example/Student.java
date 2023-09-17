@@ -63,9 +63,10 @@ public class Student {
     public Student(String firstName, String lastName, Double[] testScores){
         this.firstName = firstName;
         this.lastName = lastName;
-//        this.examScores = examScores;
         this.examScores = new ArrayList<>(Arrays.asList(testScores));
+
     }
+
 
 
     @Override
