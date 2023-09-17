@@ -18,7 +18,7 @@ public class Student {
 //        return "Exam "
 //    }
 
-    public String getScores(){
+    public String getExamScores(){
         String scoreString = "Exam Scores: \n";
         int count = 0;
         for(Double score: this.examScores){
@@ -75,7 +75,7 @@ public class Student {
                 firstLine = "> Student Name: " + this.getFirstName() + " " + this.getLastName() + "\n";
                 secondLine = "> Average Score: " + this.getAverageExamScore() + " \n";
 
-        return firstLine + secondLine + "> " + getScores();
+        return firstLine + secondLine + "> " + getExamScores();
     }
 
 

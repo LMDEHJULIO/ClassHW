@@ -24,6 +24,12 @@ public class Main {
                 new Double[]{100.00, 40.96}
         );
 
+        Student student3 = new Student(
+                "Valentina",
+                "Shevchenko",
+                new Double[]{80.00, 80.00}
+        );
+
 //        System.out.println(student1.getFirstName());
 //        System.out.println(student1.getLastName());
 //        student1.getScores();
@@ -49,6 +55,8 @@ public class Main {
         System.out.println(firstClass.getStudents());
 
         firstClass.addStudent(student2);
+
+        firstClass.addStudent(student3);
 
         System.out.println(firstClass.getHeadCount());
 

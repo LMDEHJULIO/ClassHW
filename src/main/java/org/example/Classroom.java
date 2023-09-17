@@ -8,6 +8,12 @@ import java.util.stream.Stream;
 public class Classroom {
     private Student[] students;
 
+    /**
+     * Adds new student to ClassRoom instance
+     * @param newStudent the student being added to the classroom
+     * @return true if student added, false and print out if not
+     */
+
     public boolean addStudent(Student newStudent){
         for(int i = 0; i < students.length; i++) {
             if (students[i] == null) {
