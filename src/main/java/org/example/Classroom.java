@@ -22,7 +22,7 @@ public class Classroom {
     public String getStudents(){
         String studentString = "";
         for(Student student : this.students){
-            if(student != null) {
+            if(studentNotNull(student)) {
                 studentString += student.toString();
             }
 
@@ -46,7 +46,7 @@ public class Classroom {
     // https://medium.com/@lonell.liburd/chaining-comparators-and-sorting-in-java-498b8e1e34a8
 
     public Student[] getStudentsByScore(){
-       return Arrays.stream(this.students).filter(student -> studentNotNull(student)).sorted((s1, s2) -> Double.compare(s1.getAverageExamScore(), s2.getAverageExamScore())).toArray(Student[]::new); // constructor reff
+       return Arrays.stream(this.students).filter(student -> studentNotNull(student)).sorted((s1, s2) -> Double.compare(s2.getAverageExamScore(), s1.getAverageExamScore())).toArray(Student[]::new);
     }
 
     public ArrayList<Character> getGradeBook(){

@@ -68,6 +68,11 @@ public class Main {
 
         Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
 
+                firstClass.removeStudent(student2);
+
+
+        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
+
 
     }
 

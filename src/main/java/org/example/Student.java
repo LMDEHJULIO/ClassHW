@@ -6,8 +6,6 @@ import java.util.Arrays;
 
 public class Student {
 
-
-
     private String firstName, lastName;
 
     private ArrayList<Double> examScores;
@@ -22,11 +20,13 @@ public class Student {
 
     public String getScores(){
         String scoreString = "Exam Scores: \n";
+        int count = 0;
         for(Double score: this.examScores){
-            scoreString += "Exam 1 -> " + score + " \n";
+            count++;
+            scoreString += "   " + "Exam " + count + " -> " + score + " \n";
         };
 
-        return scoreString.indent(this.examScores.size());
+        return scoreString;
     }
 
 
@@ -63,7 +63,7 @@ public class Student {
     public Student(String firstName, String lastName, Double[] testScores){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.examScores = new ArrayList<>(Arrays.asList(testScores));
+        this.examScores = new ArrayList<>(Arrays.asList(testScores)); // create ArrayList from testScorres array
 
     }
 
@@ -72,10 +72,10 @@ public class Student {
     @Override
     public String toString(){
         String firstLine, secondLine;
-                firstLine = "> Student Name: " + this.getFirstName() + " " + this.getLastName() + " \n";
+                firstLine = "> Student Name: " + this.getFirstName() + " " + this.getLastName() + "\n";
                 secondLine = "> Average Score: " + this.getAverageExamScore() + " \n";
 
-        return firstLine + secondLine + ">" + getScores();
+        return firstLine + secondLine + "> " + getScores();
     }
 
 
