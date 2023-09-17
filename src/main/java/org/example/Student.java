@@ -13,10 +13,6 @@ public class Student {
     public void addExamScore(Double score){
         this.examScores.add(score);
     }
-//
-//    public String formatScore(Double score){
-//        return "Exam "
-//    }
 
     public String getExamScores(){
         String scoreString = "Exam Scores: \n";

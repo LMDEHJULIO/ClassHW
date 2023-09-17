@@ -11,7 +11,7 @@ public class Classroom {
     /**
      * Adds new student to ClassRoom instance
      * @param newStudent the student being added to the classroom
-     * @return true if student added, false and print out if not
+     * @return true if student added, false (for testing/error-handling purposes) and print out if not
      */
 
     public boolean addStudent(Student newStudent){
