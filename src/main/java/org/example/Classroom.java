@@ -43,8 +43,6 @@ public class Classroom {
 //
 //        }
 
-        System.out.println(this.students);
-
         return Arrays.stream(this.students).filter(this::studentNotNull).toArray(Student[]::new);
     }
 
@@ -71,30 +69,6 @@ public class Classroom {
        return Arrays.stream(this.students).filter(student -> studentNotNull(student)).sorted((s1, s2) -> Double.compare(s2.getAverageExamScore(), s1.getAverageExamScore())).toArray(Student[]::new);
     }
 
-//    public ArrayList<Character> getGradeBook(){
-//        char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
-//        char letterGrade;
-//        ArrayList<Character> gradebook = new ArrayList<>();
-//
-//
-//        for(Student student : this.students){
-//
-//            if(studentNotNull(student)){
-//                Double averageScore = student.getAverageExamScore();
-//
-//                letterGrade = (averageScore > 93) ? letterGrades[0] :
-//                              (averageScore > 85) ? letterGrades[1] :
-//                              (averageScore > 80) ? letterGrades[2] :
-//                              (averageScore > 70) ? letterGrades[3] :
-//                              letterGrades[4];
-//
-//                gradebook.add(letterGrade);
-//            }
-//
-//        }
-//
-//        return gradebook;
-//    }
 
     /**
      * Determines letter grade by getting student, taking student's avg score, and returning a letter based on the calculation
@@ -104,7 +78,6 @@ public class Classroom {
     public char getLetterGrade(Student student){
         char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
         char letterGrade;
-
 
         double averageScore = student.getAverageExamScore();
 
@@ -124,6 +97,10 @@ public class Classroom {
         Arrays.stream(students).filter(this::studentNotNull).forEach(student -> studentScores.put(student, this.getLetterGrade(student)));
 
         return studentScores;
+    }
+
+    public void printGradeBook(Map<Student, Character> gradeBook){
+        gradeBook.forEach((student, letterGrade) -> System.out.println(student.getFirstName() + " " + student.getLastName() + " : " + letterGrade) );
     }
 
     /**

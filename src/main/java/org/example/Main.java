@@ -81,11 +81,9 @@ public class Main {
 //         firstClass.getStudentsByScore().forEach((student, score) -> System.out.println(student + " : " + score));
         Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
 
-     System.out.println(firstClass.getStudents());
+//     System.out.println(firstClass.getStudents());
 
-     System.out.println(student1.getFirstName());
-
-         System.out.println(firstClass.getGradeBook());
+     firstClass.printGradeBook(firstClass.getGradeBook());
 
     }
 
