@@ -31,6 +31,17 @@ public class ClassroomTest extends TestCase {
     }
 
     public void testRemoveStudent() {
+        Classroom classroom2 = new Classroom();
+
+        Student student2 = new Student("Jon", "Wick", new Double[]{80.00, 100.00, 95.00});
+
+        classroom2.addStudent(student2);
+
+//        classroom2.removeStudent(student2);
+
+        classroom2.removeStudent(student2);
+
+        assertEquals(0, classroom2.getHeadCount());
     }
 
     public void testGetHeadCount() {

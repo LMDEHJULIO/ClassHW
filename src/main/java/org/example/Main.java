@@ -33,7 +33,7 @@ public class Main {
 //        System.out.println(student1.getFirstName());
 //        System.out.println(student1.getLastName());
 //        student1.getScores();
-        student1.setExamScore(0, 150);
+        student1.setExamScore(0, 98);
 
 //        System.out.println(student1.getScores());
 //

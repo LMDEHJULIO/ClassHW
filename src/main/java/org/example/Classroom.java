@@ -36,6 +36,10 @@ public class Classroom {
         return studentString;
     }
 
+    public void setStudents(Student[] students){
+        this.students = students;
+    }
+
     public Double getAverageScore(){
         double classAvg = 0.0;
 
@@ -80,11 +84,12 @@ public class Classroom {
         return gradebook;
     }
 
-    public void removeStudent(Student expelledStudent){ // input
-        // do something with input
-        int expelledStudentIndex = Arrays.asList(this.students).indexOf(expelledStudent); // get index of expelled student
+    public void removeStudent(Student expelledStudent){
+//        int expelledStudentIndex = Arrays.asList(this.students).indexOf(expelledStudent); // get index of expelled student
 
-        this.students[expelledStudentIndex] = null; // access student at that array, and nullify the data
+         this.setStudents(Arrays.stream(this.students).filter(student -> student != expelledStudent).toArray(Student[]::new));
+
+//        this.students[expelledStudentIndex] = null; // access student at that array, and nullify the data
     }
 
 
