@@ -52,7 +52,7 @@ public class Main {
 
         firstClass.addStudent(student1);
 
-        System.out.println(firstClass.getStudents());
+//        System.out.println(Arrays.toString(firstClass.getStudents()));
 
         firstClass.addStudent(student2);
 
@@ -60,7 +60,7 @@ public class Main {
 
         System.out.println(firstClass.getHeadCount());
 
-        System.out.println(firstClass.getStudents());
+//        System.out.println(Arrays.toString(firstClass.getStudents()));
 
         System.out.println(firstClass.getAverageScore());
 
@@ -68,19 +68,24 @@ public class Main {
 
         System.out.println(firstClass.getHeadCount());
 
-        System.out.println(firstClass.getStudents());
+//        System.out.println(Arrays.toString(firstClass.getStudents()));
 
         System.out.println(firstClass.getAverageScore());
 
         System.out.println(firstClass.getGradeBook());
 
+//        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
+
+        firstClass.removeStudent(student2);
+
+//         firstClass.getStudentsByScore().forEach((student, score) -> System.out.println(student + " : " + score));
         Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
 
-                firstClass.removeStudent(student2);
+     System.out.println(firstClass.getStudents());
 
+     System.out.println(student1.getFirstName());
 
-        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
-
+         System.out.println(firstClass.getGradeBook());
 
     }
 

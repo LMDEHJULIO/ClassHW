@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Classroom {
@@ -25,15 +23,29 @@ public class Classroom {
         return false;
     }
 
-    public String getStudents(){
-        String studentString = "";
-        for(Student student : this.students){
-            if(studentNotNull(student)) {
-                studentString += student.toString();
-            }
+//    public String getStudents(){
+//        String studentString = "";
+//        for(Student student : this.students){
+//            if(studentNotNull(student)) {
+//                studentString += student.toString();
+//            }
+//
+//        }
+//        return studentString;
+//    }
 
-        }
-        return studentString;
+    public Student[] getStudents(){
+//        String studentString = "";
+//        for(Student student : this.students){
+//            if(studentNotNull(student)) {
+//                studentString += student.toString();
+//            }
+//
+//        }
+
+        System.out.println(this.students);
+
+        return Arrays.stream(this.students).filter(this::studentNotNull).toArray(Student[]::new);
     }
 
     public void setStudents(Student[] students){
@@ -59,39 +71,72 @@ public class Classroom {
        return Arrays.stream(this.students).filter(student -> studentNotNull(student)).sorted((s1, s2) -> Double.compare(s2.getAverageExamScore(), s1.getAverageExamScore())).toArray(Student[]::new);
     }
 
-    public ArrayList<Character> getGradeBook(){
+//    public ArrayList<Character> getGradeBook(){
+//        char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
+//        char letterGrade;
+//        ArrayList<Character> gradebook = new ArrayList<>();
+//
+//
+//        for(Student student : this.students){
+//
+//            if(studentNotNull(student)){
+//                Double averageScore = student.getAverageExamScore();
+//
+//                letterGrade = (averageScore > 93) ? letterGrades[0] :
+//                              (averageScore > 85) ? letterGrades[1] :
+//                              (averageScore > 80) ? letterGrades[2] :
+//                              (averageScore > 70) ? letterGrades[3] :
+//                              letterGrades[4];
+//
+//                gradebook.add(letterGrade);
+//            }
+//
+//        }
+//
+//        return gradebook;
+//    }
+
+    /**
+     * Determines letter grade by getting student, taking student's avg score, and returning a letter based on the calculation
+     * @param student
+     * @return char representing the letter grade
+     */
+    public char getLetterGrade(Student student){
         char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
         char letterGrade;
-        ArrayList<Character> gradebook = new ArrayList<>();
 
 
-        for(Student student : this.students){
+        double averageScore = student.getAverageExamScore();
 
-            if(studentNotNull(student)){
-                Double averageScore = student.getAverageExamScore();
 
-                letterGrade = (averageScore > 93) ? letterGrades[0] :
-                              (averageScore > 85) ? letterGrades[1] :
-                              (averageScore > 80) ? letterGrades[2] :
-                              (averageScore > 70) ? letterGrades[3] :
-                              letterGrades[4];
+        letterGrade = (averageScore > 93) ? letterGrades[0] :
+                      (averageScore > 85) ? letterGrades[1] :
+                      (averageScore > 80) ? letterGrades[2] :
+                      (averageScore > 70) ? letterGrades[3] :
+                      letterGrades[4];
 
-                gradebook.add(letterGrade);
-            }
-
-        }
-
-        return gradebook;
+        return letterGrade;
     }
 
+    public Map<Student, Character> getGradeBook(){
+        Map<Student, Character> studentScores = new HashMap<>();
+        // Filter out null student elements, forEach student, map student to Average ExamScore
+        Arrays.stream(students).filter(this::studentNotNull).forEach(student -> studentScores.put(student, this.getLetterGrade(student)));
+
+        return studentScores;
+    }
+
+    /**
+     *
+     * @param expelledStudent
+     * @description - Removes student from Classroom using filter where studen != expelled student
+     */
+
     public void removeStudent(Student expelledStudent){
-//        int expelledStudentIndex = Arrays.asList(this.students).indexOf(expelledStudent); // get index of expelled student
 
          this.setStudents(Arrays.stream(this.students).filter(student -> student != expelledStudent).toArray(Student[]::new));
 
-//        this.students[expelledStudentIndex] = null; // access student at that array, and nullify the data
     }
-
 
     public int getHeadCount(){
         return (int) Arrays.stream(this.students).filter(student -> studentNotNull(student)).count();
