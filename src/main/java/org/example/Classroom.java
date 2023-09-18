@@ -1,6 +1,6 @@
 package org.example;
-
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class Classroom {
@@ -23,27 +23,12 @@ public class Classroom {
         return false;
     }
 
-//    public String getStudents(){
-//        String studentString = "";
-//        for(Student student : this.students){
-//            if(studentNotNull(student)) {
-//                studentString += student.toString();
-//            }
-//
-//        }
-//        return studentString;
-//    }
-
     public Student[] getStudents(){
-//        String studentString = "";
-//        for(Student student : this.students){
-//            if(studentNotNull(student)) {
-//                studentString += student.toString();
-//            }
-//
-//        }
-
         return Arrays.stream(this.students).filter(this::studentNotNull).toArray(Student[]::new);
+    }
+
+    public void printStudents(){
+        System.out.println(Arrays.toString(this.getStudents()));
     }
 
     public void setStudents(Student[] students){
@@ -70,16 +55,23 @@ public class Classroom {
     }
 
 
+    public void printStudentsByScore(){
+        Arrays.stream(getStudentsByScore()).forEach(System.out::println);
+    }
+
     /**
      * Determines letter grade by getting student, taking student's avg score, and returning a letter based on the calculation
      * @param student
      * @return char representing the letter grade
      */
+
     public char getLetterGrade(Student student){
         char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
         char letterGrade;
 
         double averageScore = student.getAverageExamScore();
+
+        // Altering code for percentiles - I suck at math
 
 
         letterGrade = (averageScore > 93) ? letterGrades[0] :
@@ -91,10 +83,14 @@ public class Classroom {
         return letterGrade;
     }
 
+//    public double calculatePercentile(double avgScore){
+//
+//    }
+
     public Map<Student, Character> getGradeBook(){
         Map<Student, Character> studentScores = new HashMap<>();
         // Filter out null student elements, forEach student, map student to Average ExamScore
-        Arrays.stream(students).filter(this::studentNotNull).forEach(student -> studentScores.put(student, this.getLetterGrade(student)));
+        this.forEachStudent(student -> studentScores.put(student, this.getLetterGrade(student)));
 
         return studentScores;
     }
@@ -113,6 +109,10 @@ public class Classroom {
 
          this.setStudents(Arrays.stream(this.students).filter(student -> student != expelledStudent).toArray(Student[]::new));
 
+    }
+
+    public void forEachStudent(Consumer<Student> callback){
+        Arrays.stream(this.students).filter(this::studentNotNull).forEach(callback);
     }
 
     public int getHeadCount(){

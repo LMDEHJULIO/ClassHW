@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int price;
 
 
        ArrayList<Double> examScores = new ArrayList<>();
@@ -32,15 +31,21 @@ public class Main {
 
 //        System.out.println(student1.getFirstName());
 //        System.out.println(student1.getLastName());
-//        student1.getScores();
+
+        // Get Exam scores - should be 100.00 and 86.96
+
+//        System.out.println(student1.getExamScores());
+
+        //Set student one's exam score - first exam score should now be 98
         student1.setExamScore(0, 98);
 
-//        System.out.println(student1.getScores());
-//
+        // Get new exam score - should be 98.0, 86.06
+//        System.out.println(student1.getExamScores());
+////
 //        System.out.println(student1.getAverageExamScore());
 
-        student1.addExamScore(78.5);
-
+//        student1.addExamScore(78.5);
+//
 //        System.out.println(student1.getAverageExamScore());
 
 //        System.out.println(student1.toString());
@@ -53,6 +58,8 @@ public class Main {
         firstClass.addStudent(student1);
 
 //        System.out.println(Arrays.toString(firstClass.getStudents()));
+
+        firstClass.printStudents();
 
         firstClass.addStudent(student2);
 
@@ -70,16 +77,19 @@ public class Main {
 
 //        System.out.println(Arrays.toString(firstClass.getStudents()));
 
-        System.out.println(firstClass.getAverageScore());
+//        System.out.println(firstClass.getAverageScore());
 
-        System.out.println(firstClass.getGradeBook());
+//        System.out.println(firstClass.getGradeBook());
 
 //        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
 
-        firstClass.removeStudent(student2);
+        firstClass.printStudentsByScore();
+//        firstClass.removeStudent(student2);
 
 //         firstClass.getStudentsByScore().forEach((student, score) -> System.out.println(student + " : " + score));
-        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
+
+
+//        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
 
 //     System.out.println(firstClass.getStudents());
 
