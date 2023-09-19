@@ -35,16 +35,12 @@ public class Classroom {
         this.students = students;
     }
 
-    public Double getAverageScore(){
-        double classAvg = 0.0;
+    public OptionalDouble getAverageScore(){
+        // Very helpful article for using mapToDouble to extract double value from operation
 
-        for(Student student : this.students){
-            if(studentNotNull(student)){
-                classAvg += student.getAverageExamScore();
-            }
-        }
+        https://www.geeksforgeeks.org/stream-maptodouble-java-examples/
 
-        return classAvg / this.getHeadCount();
+        return Arrays.stream(this.students).filter(this::studentNotNull).mapToDouble(Student::getAverageExamScore).average();
     }
 
     // Figure out good comparison option within sorted - found this great article on comparators
@@ -83,9 +79,13 @@ public class Classroom {
         return letterGrade;
     }
 
-//    public double calculatePercentile(double avgScore){
-//
-//    }
+    public double calculatePercentile(double avgScore){
+         return avgScore > 93 ? 90.0 :
+                avgScore > 86 ? 75.0 :
+                avgScore > 81 ? 50.0 :
+                avgScore > 71 ? 25.0 :
+                10.0;
+    }
 
     public Map<Student, Character> getGradeBook(){
         Map<Student, Character> studentScores = new HashMap<>();
