@@ -1,3 +1,18 @@
+# Resources Used :
+
+
+
+## Learning comparators
+
+- https://medium.com/@lonell.liburd/chaining-comparators-and-sorting-in-java-498b8e1e34a8
+
+## Learning MaptoDouble 
+- https://www.geeksforgeeks.org/stream-maptodouble-java-examples/
+
+## Apache Commons Statistics/Math3/Normalize Distribution
+
+- https://commons.apache.org/proper/commons-statistics/
+
 # Head First Java: Chapters 5-10 Overview
 
 ## Chapter 5: Writing a Program: Extra-Strength Methods
