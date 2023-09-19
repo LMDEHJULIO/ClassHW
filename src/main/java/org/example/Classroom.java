@@ -88,13 +88,13 @@ public class Classroom {
                 // Currently has percentiles backwards to account for return value of cumulativeProb
                 // Otherwise grading is backwards - 99.99% my fault
 
-                if (cdf <= 0.10) {
+                if (cdf <= 0.10) { // lower 11th - I think
                     letterGrade = 'F';
                 } else if (cdf <= 0.29) {
                     letterGrade = 'D';
                 } else if (cdf <= 0.50) {
                     letterGrade = 'C';
-                } else if (cdf <= 0.89) {
+                } else if (cdf <= 0.89) { // .89 and above - in other words upper 10th - I think
                     letterGrade = 'B';
                 } else {
                     letterGrade = 'A';
