@@ -1,7 +1,12 @@
 package org.example;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.apache.commons.math3.analysis.function.Max;
+import org.apache.commons.math3.analysis.function.Min;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class Classroom {
     private Student[] students;
@@ -35,12 +40,12 @@ public class Classroom {
         this.students = students;
     }
 
-    public OptionalDouble getAverageScore(){
+    public double getAverageScore(){
         // Very helpful article for using mapToDouble to extract double value from operation
 
         https://www.geeksforgeeks.org/stream-maptodouble-java-examples/
 
-        return Arrays.stream(this.students).filter(this::studentNotNull).mapToDouble(Student::getAverageExamScore).average();
+        return Arrays.stream(this.students).filter(this::studentNotNull).mapToDouble(Student::getAverageExamScore).average().orElse(0.0);
     }
 
     // Figure out good comparison option within sorted - found this great article on comparators
@@ -61,56 +66,46 @@ public class Classroom {
      * @return char representing the letter grade
      */
 
-//    public char getLetterGrade(Student student){
-//        char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
-//        char letterGrade;
-//
-//        double averageScore = student.getAverageExamScore();
-//
-//        // Altering code for percentiles - I suck at math
-//
-//
-//        letterGrade = (averageScore > 93) ? letterGrades[0] :
-//                      (averageScore > 85) ? letterGrades[1] :
-//                      (averageScore > 80) ? letterGrades[2] :
-//                      (averageScore > 70) ? letterGrades[3] :
-//                      letterGrades[4];
-//
-//        return letterGrade;
-//    }
-
-    public char getLetterGrade(double percentile){
-        char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
-        char letterGrade;
-
-//        double averageScore = student.getAverageExamScore();
-
-        // Altering code for percentiles - I suck at math
-
-
-        letterGrade = (percentile > 93) ? letterGrades[0] :
-                      (percentile > 85) ? letterGrades[1] :
-                      (percentile > 80) ? letterGrades[2] :
-                      (percentile > 70) ? letterGrades[3] :
-                      letterGrades[4];
-
-        return letterGrade;
-    }
-
-    public double calculatePercentile(double avgScore){
-         return avgScore >= 93 ? 90.0 :
-                avgScore >= 86 ? 75.0 :
-                avgScore >= 81 ? 50.0 :
-                avgScore >= 71 ? 25.0 :
-                10.0;
-    }
-
     public Map<Student, Character> getGradeBook(){
         Map<Student, Character> studentScores = new HashMap<>();
 
-        this.forEachStudent(student -> studentScores.put(student, this.getLetterGrade(this.calculatePercentile(student.getAverageExamScore()))));
+        // Defining parameters of the curve
+
+        double mean = 85.00; // middle of the bell curve (i think)
+
+        double standardDeviation = 8.00; // how much above/below mean scores may vary
+
+        // Create normal distribution of grades using params above ^
+
+        NormalDistribution curve = new NormalDistribution(mean, standardDeviation);
+
+        for (Student student : students) {
+            if (student != null) {
+                double cdf = curve.cumulativeProbability(student.getAverageExamScore());
+                double tenthpercentile = curve.inverseCumulativeProbability(0.10);
+                char letterGrade;
+
+                // Currently has percentiles backwards to account for return value of cumulativeProb
+                // Otherwise grading is backwards - 99.99% my fault
+
+                if (cdf <= 0.10) {
+                    letterGrade = 'F';
+                } else if (cdf <= 0.29) {
+                    letterGrade = 'D';
+                } else if (cdf <= 0.50) {
+                    letterGrade = 'C';
+                } else if (cdf <= 0.89) {
+                    letterGrade = 'B';
+                } else {
+                    letterGrade = 'A';
+                }
+
+                studentScores.put(student, letterGrade);
+            }
+        }
 
         return studentScores;
+
     }
 
     public void printGradeBook(Map<Student, Character> gradeBook){

@@ -42,7 +42,7 @@ public class Main {
         // Get new exam score - should be 98.0, 86.06
 //        System.out.println(student1.getExamScores());
 ////
-//        System.out.println(student1.getAverageExamScore());
+        System.out.println(student1.getAverageExamScore());
 
 //        student1.addExamScore(78.5);
 //
@@ -76,7 +76,7 @@ public class Main {
         System.out.println(firstClass.getHeadCount());
 
 //        System.out.println(Arrays.toString(firstClass.getStudents()));
-
+//
 //        System.out.println(firstClass.getAverageScore());
 
 //        System.out.println(firstClass.getGradeBook());
