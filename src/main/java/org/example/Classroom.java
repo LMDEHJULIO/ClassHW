@@ -1,11 +1,6 @@
 package org.example;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.apache.commons.math3.analysis.function.Max;
-import org.apache.commons.math3.analysis.function.Min;
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class Classroom {
@@ -69,31 +64,8 @@ public class Classroom {
     public Map<Student, Character> getGradeBook(){
         Map<Student, Character> studentScores = new HashMap<>();
 
-        // Defining parameters of the curve
-
-//        double mean = 85.00; // middle of the bell curve (i think)
-//
-//        double standardDeviation = 8.00; // how much above/below mean scores may vary
-
-        // Create normal distribution of grades using params above ^
-
-//        NormalDistribution curve = new NormalDistribution(mean, standardDeviation);
-
-        Arrays.stream(this.students).filter(student -> studentNotNull(student)).forEach(student -> studentScores.put(student, getLetterGrade(calculatePercentTile(student.getAverageExamScore()), student.getAverageExamScore())));
-//        for (Student student : students) {
-//            if (student != null) {
-//                double cdf = curve.cumulativeProbability(student.getAverageExamScore());
-//                double tenthpercentile = curve.inverseCumulativeProbability(0.10);
-//                char letterGrade;
-//
-//                // Currently has percentiles backwards to account for return value of cumulativeProb
-//                // Otherwise grading is backwards - 99.99% my fault
-//
-//
-//
-//                studentScores.put(student, getLetterGrade(calculatePercentTile(student.getAverageExamScore()), student.getAverageExamScore()));
-//            }
-//        }
+        Arrays.stream(this.students).filter(student -> studentNotNull(student))
+                .forEach(student -> studentScores.put(student, getLetterGrade(calculatePercentTile(student.getAverageExamScore()), student.getAverageExamScore())));
 
         return studentScores;
 
@@ -108,27 +80,10 @@ public class Classroom {
 
         NormalDistribution curve = new NormalDistribution(mean, standardDeviation);
 
-        double cdf = curve.cumulativeProbability(avgScore);
-
-        return cdf;
+        return curve.cumulativeProbability(avgScore);
     }
 
     public char getLetterGrade(double percentile, double examScore){
-
-//        double cdf = curve.cumulativeProbability(examScore);
-
-//        if (cdf <= 0.10) { // lower 11th - I think
-//            letterGrade = 'F';
-//        } else if (cdf <= 0.29) {
-//            letterGrade = 'D';
-//        } else if (cdf <= 0.50) {
-//            letterGrade = 'C';
-//        } else if (cdf <= 0.89) { // .89 and above - in other words upper 10th - I think
-//            letterGrade = 'B';
-//        } else {
-//            letterGrade = 'A';
-//        }
-
         return (percentile <= .10) ? 'F':
                (percentile <= .29) ? 'D':
                (percentile <= .5) ? 'C':
@@ -147,9 +102,7 @@ public class Classroom {
      */
 
     public void removeStudent(Student expelledStudent){
-
          this.setStudents(Arrays.stream(this.students).filter(student -> student != expelledStudent).toArray(Student[]::new));
-
     }
 
     public void forEachStudent(Consumer<Student> callback){
