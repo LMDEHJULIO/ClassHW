@@ -37,7 +37,7 @@ public class Main {
 //        System.out.println(student1.getExamScores());
 
         //Set student one's exam score - first exam score should now be 98
-        student1.setExamScore(0, 98);
+        student1.setExamScore(1, 100);
 
         // Get new exam score - should be 98.0, 86.06
 //        System.out.println(student1.getExamScores());
@@ -94,7 +94,8 @@ public class Main {
 //     System.out.println(firstClass.getStudents());
 
      firstClass.printGradeBook(firstClass.getGradeBook());
-
+//
+//     System.out.println(firstClass.getStudents());
     }
 
 
