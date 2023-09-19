@@ -64,11 +64,9 @@ public class Classroom {
     public Map<Student, Character> getGradeBook(){
         Map<Student, Character> studentScores = new HashMap<>();
 
-        Arrays.stream(this.students).filter(student -> studentNotNull(student))
-                .forEach(student -> studentScores.put(student, getLetterGrade(calculatePercentTile(student.getAverageExamScore()), student.getAverageExamScore())));
+        forEachStudent(student -> studentScores.put(student, getLetterGrade(calculatePercentTile(student.getAverageExamScore()), student.getAverageExamScore())));
 
         return studentScores;
-
     }
 
     public double calculatePercentTile(double avgScore){
