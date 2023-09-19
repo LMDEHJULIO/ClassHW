@@ -91,7 +91,16 @@ public class Classroom {
     // https://medium.com/@lonell.liburd/chaining-comparators-and-sorting-in-java-498b8e1e34a8
 
     public Student[] getStudentsByScore(){
-       return Arrays.stream(this.students).filter(this::studentNotNull).sorted((s1, s2) -> Double.compare(s2.getAverageExamScore(), s1.getAverageExamScore())).toArray(Student[]::new);
+       return Arrays.stream(this.students).filter(this::studentNotNull).sorted((s1, s2) -> {
+
+           int comparison = Double.compare(s2.getAverageExamScore(), s1.getAverageExamScore());
+
+           if(comparison == 0){
+               return s1.getFirstName().compareTo(s2.getFirstName());
+           }
+           return comparison;
+
+       }).toArray(Student[]::new);
     }
 
     /**

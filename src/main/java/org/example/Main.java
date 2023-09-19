@@ -75,27 +75,12 @@ public class Main {
 
         System.out.println(firstClass.getHeadCount());
 
-//        System.out.println(Arrays.toString(firstClass.getStudents()));
-//
-//        System.out.println(firstClass.getAverageScore());
-
-//        System.out.println(firstClass.getGradeBook());
-
-//        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
 
         firstClass.printStudentsByScore();
-//        firstClass.removeStudent(student2);
-
-//         firstClass.getStudentsByScore().forEach((student, score) -> System.out.println(student + " : " + score));
 
 
-//        Arrays.stream(firstClass.getStudentsByScore()).forEach(student -> System.out.println(student));;
+      firstClass.printGradeBook(firstClass.getGradeBook());
 
-//     System.out.println(firstClass.getStudents());
-
-     firstClass.printGradeBook(firstClass.getGradeBook());
-//
-//     System.out.println(firstClass.getStudents());
     }
 
 
