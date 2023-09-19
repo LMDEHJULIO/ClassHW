@@ -61,36 +61,54 @@ public class Classroom {
      * @return char representing the letter grade
      */
 
-    public char getLetterGrade(Student student){
+//    public char getLetterGrade(Student student){
+//        char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
+//        char letterGrade;
+//
+//        double averageScore = student.getAverageExamScore();
+//
+//        // Altering code for percentiles - I suck at math
+//
+//
+//        letterGrade = (averageScore > 93) ? letterGrades[0] :
+//                      (averageScore > 85) ? letterGrades[1] :
+//                      (averageScore > 80) ? letterGrades[2] :
+//                      (averageScore > 70) ? letterGrades[3] :
+//                      letterGrades[4];
+//
+//        return letterGrade;
+//    }
+
+    public char getLetterGrade(double percentile){
         char[] letterGrades = {'A', 'B', 'C', 'D', 'F'};
         char letterGrade;
 
-        double averageScore = student.getAverageExamScore();
+//        double averageScore = student.getAverageExamScore();
 
         // Altering code for percentiles - I suck at math
 
 
-        letterGrade = (averageScore > 93) ? letterGrades[0] :
-                      (averageScore > 85) ? letterGrades[1] :
-                      (averageScore > 80) ? letterGrades[2] :
-                      (averageScore > 70) ? letterGrades[3] :
+        letterGrade = (percentile > 93) ? letterGrades[0] :
+                      (percentile > 85) ? letterGrades[1] :
+                      (percentile > 80) ? letterGrades[2] :
+                      (percentile > 70) ? letterGrades[3] :
                       letterGrades[4];
 
         return letterGrade;
     }
 
     public double calculatePercentile(double avgScore){
-         return avgScore > 93 ? 90.0 :
-                avgScore > 86 ? 75.0 :
-                avgScore > 81 ? 50.0 :
-                avgScore > 71 ? 25.0 :
+         return avgScore >= 93 ? 90.0 :
+                avgScore >= 86 ? 75.0 :
+                avgScore >= 81 ? 50.0 :
+                avgScore >= 71 ? 25.0 :
                 10.0;
     }
 
     public Map<Student, Character> getGradeBook(){
         Map<Student, Character> studentScores = new HashMap<>();
-        // Filter out null student elements, forEach student, map student to Average ExamScore
-        this.forEachStudent(student -> studentScores.put(student, this.getLetterGrade(student)));
+
+        this.forEachStudent(student -> studentScores.put(student, this.getLetterGrade(this.calculatePercentile(student.getAverageExamScore()))));
 
         return studentScores;
     }
