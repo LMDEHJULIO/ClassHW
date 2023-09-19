@@ -71,6 +71,35 @@ public class Classroom {
 
         // Defining parameters of the curve
 
+//        double mean = 85.00; // middle of the bell curve (i think)
+//
+//        double standardDeviation = 8.00; // how much above/below mean scores may vary
+
+        // Create normal distribution of grades using params above ^
+
+//        NormalDistribution curve = new NormalDistribution(mean, standardDeviation);
+
+        Arrays.stream(this.students).filter(student -> studentNotNull(student)).forEach(student -> studentScores.put(student, getLetterGrade(calculatePercentTile(student.getAverageExamScore()), student.getAverageExamScore())));
+//        for (Student student : students) {
+//            if (student != null) {
+//                double cdf = curve.cumulativeProbability(student.getAverageExamScore());
+//                double tenthpercentile = curve.inverseCumulativeProbability(0.10);
+//                char letterGrade;
+//
+//                // Currently has percentiles backwards to account for return value of cumulativeProb
+//                // Otherwise grading is backwards - 99.99% my fault
+//
+//
+//
+//                studentScores.put(student, getLetterGrade(calculatePercentTile(student.getAverageExamScore()), student.getAverageExamScore()));
+//            }
+//        }
+
+        return studentScores;
+
+    }
+
+    public double calculatePercentTile(double avgScore){
         double mean = 85.00; // middle of the bell curve (i think)
 
         double standardDeviation = 8.00; // how much above/below mean scores may vary
@@ -79,33 +108,32 @@ public class Classroom {
 
         NormalDistribution curve = new NormalDistribution(mean, standardDeviation);
 
-        for (Student student : students) {
-            if (student != null) {
-                double cdf = curve.cumulativeProbability(student.getAverageExamScore());
-                double tenthpercentile = curve.inverseCumulativeProbability(0.10);
-                char letterGrade;
+        double cdf = curve.cumulativeProbability(avgScore);
 
-                // Currently has percentiles backwards to account for return value of cumulativeProb
-                // Otherwise grading is backwards - 99.99% my fault
+        return cdf;
+    }
 
-                if (cdf <= 0.10) { // lower 11th - I think
-                    letterGrade = 'F';
-                } else if (cdf <= 0.29) {
-                    letterGrade = 'D';
-                } else if (cdf <= 0.50) {
-                    letterGrade = 'C';
-                } else if (cdf <= 0.89) { // .89 and above - in other words upper 10th - I think
-                    letterGrade = 'B';
-                } else {
-                    letterGrade = 'A';
-                }
+    public char getLetterGrade(double percentile, double examScore){
 
-                studentScores.put(student, letterGrade);
-            }
-        }
+//        double cdf = curve.cumulativeProbability(examScore);
 
-        return studentScores;
+//        if (cdf <= 0.10) { // lower 11th - I think
+//            letterGrade = 'F';
+//        } else if (cdf <= 0.29) {
+//            letterGrade = 'D';
+//        } else if (cdf <= 0.50) {
+//            letterGrade = 'C';
+//        } else if (cdf <= 0.89) { // .89 and above - in other words upper 10th - I think
+//            letterGrade = 'B';
+//        } else {
+//            letterGrade = 'A';
+//        }
 
+        return (percentile <= .10) ? 'F':
+               (percentile <= .29) ? 'D':
+               (percentile <= .5) ? 'C':
+               (percentile <= .89) ? 'B':
+               'A';
     }
 
     public void printGradeBook(Map<Student, Character> gradeBook){
